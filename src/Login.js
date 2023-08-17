@@ -19,7 +19,7 @@ function Login(){
           <MDBInput wrapperClass='mb-4' label='Identyfikator zespołu' id='form1' type='email'/>
           <MDBInput wrapperClass='mb-4' label='Hasło' id='form2' type='password'/>
         
-          <MDBBtn className="mb-4">Zaloguj się</MDBBtn>
+          <Link to="/dashboard"><MDBBtn className="mb-4">Zaloguj się</MDBBtn></Link> 
      
     
         </MDBContainer>
