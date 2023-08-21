@@ -8,7 +8,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 import { Link, useNavigate } from "react-router-dom";
-import lbrm from './lbrm.jpg';
+import lbrm from './Images/lbrm.png';
 import { logOut } from './Utils/logout.utils';
 import './ImageCenter.css';
 
@@ -31,7 +31,7 @@ function Dashboard(){
           <MDBBtn>Tankowanie/mycie</MDBBtn>
           <MDBBtn>Awaria</MDBBtn>
           <MDBBtn>Po dyżurze</MDBBtn>
-          <MDBBtn onClick={() => logOut(navigate) }>Wyloguj się</MDBBtn>
+          <MDBBtn onClick={() => logOut(navigate) } color='danger'>Wyloguj</MDBBtn>
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-center" style={{marginBlock: 50}}>
         <Link to="https://liberandum.pl/logowanie/?fbclid=IwAR3wmS4dJa6PwQIkF4qYi3JivUzxdJ2KfHK1HVSquExDUjoP2m0VyRIKNgo">
