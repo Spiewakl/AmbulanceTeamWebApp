@@ -13,6 +13,5 @@ export async function onLogin(navigate, login, password, source, page){
     return;
   }
   window.localStorage.setItem("token", access.access_token);
-  console.log(window.localStorage.getItem("token"));
     navigate(page)
   }
