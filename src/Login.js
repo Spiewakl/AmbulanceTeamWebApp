@@ -27,9 +27,10 @@ function Login(){
   const handleChangePassword = event => {
     setPassword(event.target.value);
 
-    console.log('value is:', event.target.value);
+    console.log('value is:', event.target.value); 
   
   };
+
     return (
       <div>
         <div className="center-container">
