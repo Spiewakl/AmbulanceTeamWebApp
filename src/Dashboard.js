@@ -11,17 +11,25 @@ import { Link, useNavigate } from "react-router-dom";
 import lbrm from './Images/lbrm.png';
 import { logOut } from './Utils/logout.utils';
 import './ImageCenter.css';
-import { listTeam } from './Utils/listTeam.utils';
+import { getTeam, listTeam } from './Utils/listTeam.utils';
+import jwt_decode from "jwt-decode";
 
 function Dashboard(){
   const navigate = useNavigate();
-  
+  const token = window.localStorage.getItem("token");
+  const decoded = jwt_decode(token);
+  const id = decoded.sub
+  const [team, setTeam] = useState({});
+  useEffect(() => {
+    getTeam(id)
+    .then(team => setTeam(team))
+  }, []);
     return (
       <div>
         <div className="center-container">
         <img src={lbrm} alt="lbrm" className="centered-image"/>
         </div>
-       <div style={{textAlign: 'center', marginBottom: 30}}>Twój aktualny status to: </div>
+       <div style={{textAlign: 'center', marginBottom: 30}}>Twój aktualny status to: {team.status}</div>
         <div className="d-grid gap-4 col-2 mx-auto">
           <MDBBtn>Wolny - w bazie</MDBBtn>
           <MDBBtn>Wolny - poza bazą</MDBBtn>

@@ -37,19 +37,24 @@ function Dispatcher(){
           <MDBBtn onClick={() => addTeam(navigate)}>Dodaj zespół</MDBBtn>
           <MDBBtn onClick={() => logOut(navigate) } color='danger'>Wyloguj</MDBBtn>
         </div>
-
-        <ul style={{marginTop: 30}}>
+        
+        
       {teams.map((team) => (
-        <MDBListGroup style={{minWidth: '22rem', marginRight: 5000}} >
+        <div className="center-container">
+        <MDBListGroup style={{minWidth: '22rem'}} >
           <MDBListGroupItem tag='a' href='#' action noBorders color='primary' className='px-3 rounded-3 mb-2'>
-       <div style={{marginBottom: 5, color: '#177cd4', textAlign: 'center'}}>{team.name} </div>
-       <div style={{textAlign: 'center'}}>Ststus zespołu: {team.status}</div>
-       <button onClick={() => deleteTeam(refresh, team.id)}>USUŃ</button>
+       <div style={{ color: '#177cd4', textAlign: 'center'}}>{team.name} </div>
+       <div style={{textAlign: 'center'}}>Status zespołu: {team.status}</div>
+       <button type="button" class="btn btn-warning">Wyślij zespół</button>
+       <button type="button" class="btn btn-success" style={{marginInline: 10}}>Zwolnij zespół</button>
+       <button type="button" class="btn btn-danger" onClick={() => deleteTeam(refresh, team.id)}>USUŃ</button>
       </MDBListGroupItem>
       </MDBListGroup>
+      </div>
       ))}
       
-    </ul>
+    
+    
     
     </div>
     

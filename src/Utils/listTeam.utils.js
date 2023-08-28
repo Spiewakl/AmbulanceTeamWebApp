@@ -5,3 +5,10 @@ export async function listTeam(){
     console.log(teams);
     return teams;
 }
+
+export async function getTeam(id){
+  const teams = await listTeam()
+  const found = teams.find((element) => element.id === id);
+  console.log(found)
+  return found;
+}
