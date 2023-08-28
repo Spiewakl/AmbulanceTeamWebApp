@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MDBContainer,
   MDBInput,
@@ -11,15 +11,17 @@ import { Link, useNavigate } from "react-router-dom";
 import lbrm from './Images/lbrm.png';
 import { logOut } from './Utils/logout.utils';
 import './ImageCenter.css';
+import { listTeam } from './Utils/listTeam.utils';
 
 function Dashboard(){
   const navigate = useNavigate();
-
+  
     return (
       <div>
         <div className="center-container">
         <img src={lbrm} alt="lbrm" className="centered-image"/>
         </div>
+       <div style={{textAlign: 'center', marginBottom: 30}}>Twój aktualny status to: </div>
         <div className="d-grid gap-4 col-2 mx-auto">
           <MDBBtn>Wolny - w bazie</MDBBtn>
           <MDBBtn>Wolny - poza bazą</MDBBtn>

@@ -1,3 +1,3 @@
-export function loginDispatcher(navigate){
+export function loginDispatcher(navigate, id){
     navigate('/dispatcher')
   }
