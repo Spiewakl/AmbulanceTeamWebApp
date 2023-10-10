@@ -16,6 +16,7 @@ import './ImageCenter.css';
 import { addTeam } from './Utils/addTeam.utils';
 import { listTeam } from './Utils/listTeam.utils';
 import { deleteTeam } from './Utils/deleteTeam.utils';
+import { Button, Popconfirm } from 'antd';
 
 function Dispatcher(){
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function Dispatcher(){
         
         
       {teams.map((team) => (
-        <div className="center-container">
+        <div className="center-container" style={{marginBottom: 0,}}>
         <MDBListGroup style={{minWidth: '22rem'}} >
           <MDBListGroupItem tag='a' href='#' action noBorders color='primary' className='px-3 rounded-3 mb-2'>
        <div style={{ color: '#177cd4', textAlign: 'center'}}>{team.name} </div>

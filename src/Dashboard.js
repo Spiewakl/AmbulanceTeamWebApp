@@ -11,8 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 import lbrm from './Images/lbrm.png';
 import { logOut } from './Utils/logout.utils';
 import './ImageCenter.css';
-import { getTeam, listTeam } from './Utils/listTeam.utils';
+import { getStatus, getTeam, listTeam } from './Utils/listTeam.utils';
 import jwt_decode from "jwt-decode";
+import { changeStatus } from './Utils/addTeam.utils';
 
 function Dashboard(){
   const navigate = useNavigate();
@@ -24,6 +25,13 @@ function Dashboard(){
     getTeam(id)
     .then(team => setTeam(team))
   }, []);
+
+
+  const refreshComponent = () => {
+    getTeam(id)
+    .then(team => setTeam(team))
+  };
+  
     return (
       <div>
         <div className="center-container">
@@ -31,16 +39,16 @@ function Dashboard(){
         </div>
        <div style={{textAlign: 'center', marginBottom: 30}}>Twój aktualny status to: {team.status}</div>
         <div className="d-grid gap-4 col-2 mx-auto">
-          <MDBBtn>Wolny - w bazie</MDBBtn>
-          <MDBBtn>Wolny - poza bazą</MDBBtn>
-          <MDBBtn>Przyjęcie zlecenia</MDBBtn>
-          <MDBBtn>Dojazd do pacjenta</MDBBtn>
-          <MDBBtn>W trakcie zlecenia</MDBBtn>
-          <MDBBtn>Powrót z pacjentem</MDBBtn>
-          <MDBBtn>Dezynfekcja</MDBBtn>
-          <MDBBtn>Tankowanie/mycie</MDBBtn>
-          <MDBBtn>Awaria</MDBBtn>
-          <MDBBtn>Po dyżurze</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Wolny - w bazie', team.id, refreshComponent)}>Wolny - w bazie</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Wolny - poza bazą', team.id, refreshComponent)}>Wolny - poza bazą</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Przyjęcie zlecenia', team.id, refreshComponent)}>Przyjęcie zlecenia</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Dojazd do pacjenta', team.id, refreshComponent)}>Dojazd do pacjenta</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('W trakcie zlecenia', team.id, refreshComponent)}>W trakcie zlecenia</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Powrót z pacjentem', team.id, refreshComponent)}>Powrót z pacjentem</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Dezynfekcja', team.id, refreshComponent)}>Dezynfekcja</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Tankowanie/Mycie', team.id, refreshComponent)}>Tankowanie/mycie</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Awaria', team.id, refreshComponent)}>Awaria</MDBBtn>
+          <MDBBtn onClick={() => changeStatus('Po dyżurze', team.id, refreshComponent)}>Po dyżurze</MDBBtn>
           <MDBBtn onClick={() => logOut(navigate) } color='danger'>Wyloguj</MDBBtn>
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-center" style={{marginBlock: 50}}>

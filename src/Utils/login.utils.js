@@ -1,3 +1,5 @@
+import React from "react";
+
 export async function onLogin(navigate, login, password, source, page){
   const data={
     "name": login,
@@ -9,9 +11,10 @@ export async function onLogin(navigate, login, password, source, page){
   const access = await response.json();
   console.log(access);
   if(access.statusCode===401){
-    alert('Złe hasło')
+    alert('Złe dane logowania')
     return;
   }
   window.localStorage.setItem("token", access.access_token);
     navigate(page)
   }
+
