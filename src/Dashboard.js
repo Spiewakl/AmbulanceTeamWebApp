@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import lbrm from './Images/lbrm.png';
 import { logOut } from './Utils/logout.utils';
 import './ImageCenter.css';
-import { getStatus, getTeam, listTeam } from './Utils/listTeam.utils';
+import { getStatus, getTeam, getTeamStatus, listTeam } from './Utils/listTeam.utils';
 import jwt_decode from "jwt-decode";
 import { changeStatus } from './Utils/addTeam.utils';
 
@@ -21,16 +21,23 @@ function Dashboard(){
   const decoded = jwt_decode(token);
   const id = decoded.sub
   const [team, setTeam] = useState({});
-  useEffect(() => {
-    getTeam(id)
-    .then(team => setTeam(team))
-  }, []);
-
-
+  const [teamStatus, setTeamStatus] = useState([]);
+  
   const refreshComponent = () => {
     getTeam(id)
     .then(team => setTeam(team))
+    .then(() => getTeamStatus(id))
+    .then(status => setTeamStatus(status))
   };
+
+  useEffect(() => {
+    refreshComponent()
+  }, []);
+
+  function isVisible(status){
+    
+    return teamStatus.includes(status)
+  }
   
     return (
       <div>
@@ -39,16 +46,36 @@ function Dashboard(){
         </div>
        <div style={{textAlign: 'center', marginBottom: 30}}>Twój aktualny status to: {team.status}</div>
         <div className="d-grid gap-4 col-2 mx-auto">
-          <MDBBtn onClick={() => changeStatus('Wolny - w bazie', team.id, refreshComponent)}>Wolny - w bazie</MDBBtn>
+        {isVisible('Wolny - w bazie') && (
+         <MDBBtn onClick={() => changeStatus('Wolny - w bazie', team.id, refreshComponent)}>Wolny - w bazie</MDBBtn>
+        )}
+        {isVisible('Wolny - poza bazą') && (
           <MDBBtn onClick={() => changeStatus('Wolny - poza bazą', team.id, refreshComponent)}>Wolny - poza bazą</MDBBtn>
+        )}
+         {isVisible('Przyjęcie zlecenia') && (
           <MDBBtn onClick={() => changeStatus('Przyjęcie zlecenia', team.id, refreshComponent)}>Przyjęcie zlecenia</MDBBtn>
+        )}
+        {isVisible('Dojazd do pacjenta') && (
           <MDBBtn onClick={() => changeStatus('Dojazd do pacjenta', team.id, refreshComponent)}>Dojazd do pacjenta</MDBBtn>
+        )}
+        {isVisible('W trakcie zlecenia') && (
           <MDBBtn onClick={() => changeStatus('W trakcie zlecenia', team.id, refreshComponent)}>W trakcie zlecenia</MDBBtn>
+        )}
+        {isVisible('Powrót z pacjentem') && (
           <MDBBtn onClick={() => changeStatus('Powrót z pacjentem', team.id, refreshComponent)}>Powrót z pacjentem</MDBBtn>
+        )}
+        {isVisible('Dezynfekcja') && (
           <MDBBtn onClick={() => changeStatus('Dezynfekcja', team.id, refreshComponent)}>Dezynfekcja</MDBBtn>
+        )}
+        {isVisible('Tankowanie/Mycie') && (
           <MDBBtn onClick={() => changeStatus('Tankowanie/Mycie', team.id, refreshComponent)}>Tankowanie/mycie</MDBBtn>
+        )}
+        {isVisible('Awaria') && (
           <MDBBtn onClick={() => changeStatus('Awaria', team.id, refreshComponent)}>Awaria</MDBBtn>
+        )}
+        {isVisible('Po dyżurze') && (
           <MDBBtn onClick={() => changeStatus('Po dyżurze', team.id, refreshComponent)}>Po dyżurze</MDBBtn>
+        )}
           <MDBBtn onClick={() => logOut(navigate) } color='danger'>Wyloguj</MDBBtn>
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-center" style={{marginBlock: 50}}>

@@ -12,3 +12,11 @@ export async function getTeam(id){
   console.log(found)
   return found;
 }
+
+export async function getTeamStatus(id){
+  if(!id) return []
+  const token = window.localStorage.getItem("token");
+  const response = await fetch(`http://localhost:4000/TeamStatus/${id}`,{method: "GET", headers: {"Content-Type":"application/json", "Authorization": "Bearer " + token}} );
+  const statuses = await response.json();
+  return statuses;
+}
