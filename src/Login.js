@@ -12,6 +12,7 @@ import { onLogin } from './Utils/login.utils';
 import { loginDispatcher } from './Utils/loginDispatcher.utils';
 import lbrm from './Images/lbrm.png';
 import './ImageCenter.css';
+import { io } from "socket.io-client";
 
 
 function Login(){
@@ -30,6 +31,22 @@ function Login(){
     console.log('value is:', event.target.value); 
   
   };
+
+  const socket = io('http://localhost:81');
+
+
+// client-side
+socket.on("connect", () => {
+  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+});
+
+socket.on("connect_error", (err) => {
+  console.log('wsError', err)
+});
+
+socket.on("disconnect", () => {
+  console.log(socket.id); // undefined
+});
 
     return (
       <div>
