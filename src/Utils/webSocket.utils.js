@@ -16,4 +16,7 @@ socket.on("disconnect", () => {
   console.log(socket.id); // undefined
 });
 
+socket.onAny((eventName, ...args) => {
+    console.log(eventName, args)
+  });
 }

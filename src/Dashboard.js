@@ -32,13 +32,11 @@ function Dashboard(){
   };
 
   useEffect(() => {
+    createSocket()
     refreshComponent()
   }, []);
 
-  useEffect(() => {
-    createSocket()
-  }
-  );
+  
 
   function isVisible(status){
     
