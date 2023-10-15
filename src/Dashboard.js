@@ -14,6 +14,7 @@ import './ImageCenter.css';
 import { getStatus, getTeam, getTeamStatus, listTeam } from './Utils/listTeam.utils';
 import jwt_decode from "jwt-decode";
 import { changeStatus } from './Utils/addTeam.utils';
+import { createSocket } from './Utils/webSocket.utils';
 
 function Dashboard(){
   const navigate = useNavigate();
@@ -33,6 +34,11 @@ function Dashboard(){
   useEffect(() => {
     refreshComponent()
   }, []);
+
+  useEffect(() => {
+    createSocket()
+  }
+  );
 
   function isVisible(status){
     
