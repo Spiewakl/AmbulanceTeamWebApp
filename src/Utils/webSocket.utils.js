@@ -19,4 +19,5 @@ socket.on("disconnect", () => {
 socket.onAny((eventName, ...args) => {
     console.log(eventName, args)
   });
+  return socket
 }

@@ -15,6 +15,7 @@ import { getStatus, getTeam, getTeamStatus, listTeam } from './Utils/listTeam.ut
 import jwt_decode from "jwt-decode";
 import { changeStatus } from './Utils/addTeam.utils';
 import { createSocket } from './Utils/webSocket.utils';
+import { io } from 'socket.io-client';
 
 function Dashboard(){
   const navigate = useNavigate();
@@ -32,7 +33,15 @@ function Dashboard(){
   };
 
   useEffect(() => {
-    createSocket()
+    const socket = io('http://localhost:81');
+    socket.on("status", async (data) => {
+      console.log("data", data)
+      if(data.name === team.name){
+        setTeam({status: data.status})
+        const statuses = await getTeamStatus(id)
+        setTeamStatus(statuses)
+      }
+    })
     refreshComponent()
   }, []);
 

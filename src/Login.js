@@ -37,7 +37,7 @@ function Login(){
         <div>
         <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
     
-          <MDBInput wrapperClass='mb-4' value={login} onChange={handleChange} label='Identyfikator zespołu' id='form1' type='text'/>
+          <MDBInput wrapperClass='mb-4' value={login} onChange={handleChange} label='Identyfikator' id='form1' type='text'/>
           <MDBInput wrapperClass='mb-4' value={password} onChange={handleChangePassword} label='Hasło' id='form2' type='password'/>
         
           <MDBBtn onClick={() => onLogin(navigate, login, password, "team", "/dashboard") } className="mb-4">Zaloguj zespół</MDBBtn>
